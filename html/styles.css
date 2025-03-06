@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+#notifications-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 380px;
+    z-index: 9999;
+}
+
+.notification {
+    background: rgba(15, 23, 42, 0.85);
+    border-radius: 16px;
+    padding: 16px 20px;
+    color: white;
+    transform: translateX(120%);
+    animation: slideIn 0.3s forwards;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.notification::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: currentColor;
+    opacity: 0.8;
+}
+
+.notification::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    pointer-events: none;
+}
+
+.notification.success {
+    color: #10B981;
+    box-shadow: 0 8px 32px rgba(16, 185, 129, 0.15);
+}
+
+.notification.error {
+    color: #EF4444;
+    box-shadow: 0 8px 32px rgba(239, 68, 68, 0.15);
+}
+
+.notification.info {
+    color: #3B82F6;
+    box-shadow: 0 8px 32px rgba(59, 130, 246, 0.15);
+}
+
+.notification.warning {
+    color: #F59E0B;
+    box-shadow: 0 8px 32px rgba(245, 158, 11, 0.15);
+}
+
+.notification-title {
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 6px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.notification-message {
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.notification-watermark {
+    position: absolute;
+    bottom: 8px;
+    right: 12px;
+    font-size: 10px;
+    opacity: 0.5;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+}
+
+.notification.fade-out {
+    animation: fadeOut 0.3s forwards;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(120%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(120%);
+    }
+}
+
+/* Pulse animation for the notification border */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(var(--glow-color), 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(var(--glow-color), 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(var(--glow-color), 0);
+    }
+}
